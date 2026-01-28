@@ -9,8 +9,9 @@
             --primary-gold: #d4af37;
             --secondary-gold: #f4d03f;
             --bg-dark: #0a1628;
-            --bg-card: rgba(15, 15, 30, 0.7);
-            --text-main: #d4c5a0;
+            --bg-card: rgba(15, 25, 45, 0.85); /*稍微加深背景以提高文字可读性*/
+            --text-main: #e0d8c0;
+            --text-muted: #a0aab5;
         }
 
         * {
@@ -20,12 +21,16 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', sans-serif;
+            font-family: 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-dark);
-            /* 使用类似APP的深色背景 */
-            background-image: radial-gradient(circle at 50% 50%, #1a2a40 0%, #0a1628 100%);
+            /* 深邃星空背景 */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(20, 40, 60, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 25%),
+                linear-gradient(to bottom, #0a1628 0%, #050a14 100%);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* 导航栏 */
@@ -33,218 +38,418 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(10, 22, 40, 0.95);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 15px 5%;
+            background: rgba(10, 22, 40, 0.8);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--primary-gold);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            letter-spacing: 1px;
         }
 
         .nav-links a {
-            color: #b0b0b0;
+            color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
-            transition: 0.3s;
+            margin-left: 25px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--primary-gold);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
         }
 
         .download-btn {
-            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-            color: #0f1a2e;
-            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary-gold), #b8941e);
+            color: #0f1a2e !important;
+            padding: 8px 24px;
             border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
-            color: #0f1a2e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         /* Hero 区域 */
         header {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            flex-direction: column;
-            padding: 0 20px;
-            background: url('background.jpg') center/cover no-repeat; /* 假设使用提供的背景图 */
+            padding: 80px 20px 0;
             position: relative;
         }
 
+        /* 模拟星空背景图，如果实际没有图片，这个渐变足以支撑视觉 */
         header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 22, 40, 0.6); /* 遮罩层 */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(1px 1px at 10% 10%, white, transparent),
+                        radial-gradient(1px 1px at 20% 20%, white, transparent),
+                        radial-gradient(2px 2px at 30% 30%, #ffffff55, transparent),
+                        radial-gradient(1px 1px at 40% 40%, white, transparent);
+            background-size: 550px 550px;
+            opacity: 0.3;
+            z-index: 0;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
             max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
+            animation: fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #f4d03f, #d4af37, #b8941e);
+            font-size: 4rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to bottom, #fff 20%, #d4af37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            letter-spacing: 5px;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            letter-spacing: 6px;
+            color: var(--primary-gold);
             opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 16px 45px;
             font-size: 1.2rem;
-            background: linear-gradient(135deg, #b8941e, #f4d03f);
-            color: #000;
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--primary-gold), #aa8525);
+            color: #050a14;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transition: 0.3s;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .cta-button:hover {
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
-            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            filter: brightness(1.1);
         }
 
         /* 特性介绍 */
         .features {
-            padding: 80px 5%;
+            padding: 100px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--primary-gold);
-            margin-bottom: 60px;
-            position: relative;
+            margin-bottom: 70px;
+            letter-spacing: 2px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            opacity: 0.5;
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
         }
 
         .feature-card {
             background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 30px;
-            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
-            transition: 0.3s;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
             display: block;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.2));
         }
 
         .feature-card h3 {
             color: #fff;
             margin-bottom: 15px;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            font-weight: 500;
         }
 
         .feature-card p {
-            color: #808080;
+            color: var(--text-muted);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         /* 展示区域 */
         .showcase {
-            background: rgba(15, 15, 30, 0.5);
-            padding: 80px 5%;
+            background: linear-gradient(to bottom, transparent, rgba(10,20,35,0.8), transparent);
+            padding: 100px 5%;
             text-align: center;
         }
 
         .mockup-container {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 60px;
             flex-wrap: wrap;
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
+        /* 手机模型样式优化 */
         .mockup {
             width: 280px;
-            height: 500px; /* 模拟手机比例 */
-            border: 4px solid #333;
-            border-radius: 20px;
+            height: 560px;
+            border: 8px solid #1a2a40;
+            border-radius: 40px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            background-color: #0a1628;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            background-color: #050a14;
+            transition: transform 0.5s ease;
         }
         
+        .mockup:hover {
+            transform: translateY(-10px);
+            border-color: #2a3a55;
+        }
+        
+        /* 增加手机刘海效果 */
+        .mockup::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 25px;
+            background: #1a2a40;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
         .mockup img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        
+        .mockup-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #0a1628, #152540);
+            color: #334;
+            font-size: 3rem;
+        }
 
         /* 页脚 */
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             border-top: 1px solid rgba(212, 175, 55, 0.1);
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.9rem;
+            background: #050a14;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .footer-links button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-family: inherit;
+        }
+
+        .footer-links button:hover {
+            color: var(--primary-gold);
+            text-decoration: underline;
+        }
+
+        /* --- 模态框 (Modal) 样式 --- */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85); /* 黑色背景半透明 */
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #152030;
+            margin: 5% auto;
+            padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            position: relative;
+            color: #ccc;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+        
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .modal-body h3 {
+            color: #fff;
+            margin: 20px 0 10px;
+            font-size: 1.1rem;
+        }
+        
+        .modal-body p, .modal-body li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .modal-body ul {
+            padding-left: 20px;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a1628; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-gold); 
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* 移动端适配 */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
-            .nav-links { display: none; } /* 简化处理 */
+            .nav-links { display: none; } /* 真实项目中建议做成汉堡菜单，此处保持简化 */
+            .modal-content { width: 95%; margin: 20% auto; padding: 25px; }
+            .mockup-container { gap: 30px; }
+            .mockup { width: 240px; height: 480px; }
         }
     </style>
 </head>
@@ -252,12 +457,12 @@
 
     <nav>
         <div class="logo">
-            <span>☯</span> 云中天机
+            <span style="font-size: 1.4em;">☯</span> 云中天机
         </div>
         <div class="nav-links">
             <a href="#features">功能特色</a>
             <a href="#showcase">界面预览</a>
-            <a href="#about">关于我们</a>
+            <a href="javascript:void(0)" onclick="openModal('aboutModal')">关于我们</a>
             <a href="#" class="download-btn">立即体验</a>
         </div>
     </nav>
@@ -266,8 +471,8 @@
         <div class="hero-content">
             <h1 class="hero-title">云中天机</h1>
             <p class="hero-subtitle">谙道天机 · 探知古韵</p>
-            <p style="margin-bottom: 30px; color: #ccc;">融合传统易经智慧与现代数据科技，为您指引人生方向。</p>
-            <a href="#" class="cta-button">开启探索之旅</a>
+            <p class="hero-desc">融合传统易经智慧与现代数据科技，为您指引人生方向。</p>
+            <a href="#features" class="cta-button">开启探索之旅</a>
         </div>
     </header>
 
@@ -299,29 +504,142 @@
 
     <section id="showcase" class="showcase">
         <h2 class="section-title">精美界面</h2>
-        <p style="color: #808080; margin-bottom: 30px;">深邃星空美学，沉浸式交互体验</p>
+        <p style="color: var(--text-muted); margin-bottom: 30px; letter-spacing: 1px;">深邃星空美学，沉浸式交互体验</p>
         
         <div class="mockup-container">
             <div class="mockup">
-                <img src="index.jpg" alt="APP首页">
+                <img src="5ff7aadeac7b7cb54c8779b1dc9021b4_origin(1).jpg" alt="APP首页">
             </div>
+            
             <div class="mockup">
-                <div style="width:100%; height:100%; background: url('01.png') center/contain no-repeat; background-color: #112;"></div>
+                <div class="mockup-placeholder">
+                    <span style="font-size: 0.5em; color: #aaa;">八字排盘<br>界面预览</span>
+                </div>
             </div>
              <div class="mockup">
-                <div style="width:100%; height:100%; background: url('02.png') center/contain no-repeat; background-color: #112;"></div>
+                <div class="mockup-placeholder">
+                    <span style="font-size: 0.5em; color: #aaa;">运势分析<br>界面预览</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer id="about">
+    <footer>
         <p>© 2026 云中天机团队 (Cloud Star Team). All Rights Reserved.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">
-            <a href="#" style="color: #666; margin: 0 10px;">隐私政策</a> | 
-            <a href="#" style="color: #666; margin: 0 10px;">用户协议</a> | 
-            <a href="#" style="color: #666; margin: 0 10px;">联系我们</a>
-        </p>
+        <div class="footer-links">
+            <button onclick="openModal('privacyModal')">隐私政策</button>
+            <span>|</span>
+            <button onclick="openModal('privacyModal')">用户协议</button>
+            <span>|</span>
+            <button onclick="openModal('contactModal')">联系我们</button>
+        </div>
     </footer>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>隐私政策与用户协议</h2>
+                <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>生效日期：2026年1月28日</strong></p>
+                <h3>引言</h3>
+                <p>云中天机（以下简称“本应用”）非常重视用户的隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。</p>
+                
+                <h3>1. 我们收集的信息</h3>
+                <p>为了向您提供精准的测算服务，我们需要收集以下必要信息：</p>
+                <ul>
+                    <li><strong>出生信息</strong>：包括出生日期、时间、出生地点及性别。这是进行八字排盘和运势分析的基础数据。</li>
+                    <li><strong>设备信息</strong>：包括设备型号、操作系统版本等，用于应用的基础功能适配与故障排查。</li>
+                </ul>
+
+                <h3>2. 信息的用途</h3>
+                <ul>
+                    <li>您的出生信息<strong>仅用于</strong>应用内的算法推演，为您生成个性化的运势报告。</li>
+                    <li>我们<strong>不会</strong>利用您的个人信息进行广告推销，也不会将其出售或共享给任何无关第三方。</li>
+                </ul>
+
+                <h3>3. 数据安全</h3>
+                <p>我们采用业界标准的安全技术（如SSL加密传输）来保护您的个人信息，防止数据遭到未经授权的访问、公开披露或丢失。</p>
+
+                <h3>4. 账号注销与数据删除</h3>
+                <p>您有权随时要求删除您的个人数据。您可以通过应用内的设置选项或发送邮件至 support@whcloudstar.cn 联系我们进行数据清除。</p>
+                <br>
+                <p><em>(注：用户协议详细条款通常包含服务范围、免责声明等，此处与隐私政策合并展示。)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>关于我们</h2>
+                <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <span style="font-size: 3rem; color: var(--primary-gold);">☯</span>
+                    <h3 style="margin-top: 5px;">云中天机 v1.0.0</h3>
+                </div>
+                
+                <h3>【产品理念】</h3>
+                <p>“云中天机”是一款融合东方传统智慧与现代科技的国学工具应用。我们致力于通过数字化手段，让深奥的《易经》智慧变得通俗易懂，触手可及。</p>
+
+                <h3>【核心特色】</h3>
+                <ul>
+                    <li><strong>古法传承</strong>：严谨遵循古法六爻起卦与四柱排盘逻辑，保留传统学术精髓。</li>
+                    <li><strong>科技赋能</strong>：利用AI算法辅助解析复杂卦象，提供更客观、更全面的运势解读。</li>
+                    <li><strong>指引人生</strong>：不仅仅是预测，更希望能为您在事业、情感、生活迷茫时提供一份智慧指引。</li>
+                </ul>
+
+                <h3>【团队愿景】</h3>
+                <p>探索命运的奥秘，感悟人生智慧。我们希望“云中天机”能成为您口袋里的私人国学顾问，伴您从容应对人生起伏。</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>帮助与反馈</h2>
+                <span class="close" onclick="closeModal('contactModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>常见问题</h3>
+                <p><strong>Q: 测算结果准确吗？</strong><br>A: 结果基于传统学术与大数据推演，仅供参考，请理性看待。</p>
+                <p><strong>Q: 需要提供准确的出生时间吗？</strong><br>A: 是的，精确的时间能保证排盘的准确性。</p>
+                
+                <h3>联系方式</h3>
+                <p>如果您在使用过程中遇到任何问题，或有任何建议，欢迎通过邮件联系我们：</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 3px solid var(--primary-gold);">
+                    <p style="margin:0;">📧 <strong>客服邮箱：</strong> support@whcloudstar.cn</p>
+                    <p style="margin:5px 0 0 0; font-size: 0.85em; color: #888;">在线时间：工作日 9:00 - 18:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 打开模态框
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // 禁止背景滚动
+        }
+
+        // 关闭模态框
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto"; // 恢复背景滚动
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
 
 </body>
 </html>
