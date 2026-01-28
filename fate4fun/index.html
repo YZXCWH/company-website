@@ -9,7 +9,7 @@
             --primary-gold: #d4af37;
             --secondary-gold: #f4d03f;
             --bg-dark: #0a1628;
-            --bg-card: rgba(15, 25, 45, 0.85); /*稍微加深背景以提高文字可读性*/
+            --bg-card: rgba(15, 25, 45, 0.85);
             --text-main: #e0d8c0;
             --text-muted: #a0aab5;
         }
@@ -97,7 +97,6 @@
             position: relative;
         }
 
-        /* 模拟星空背景图，如果实际没有图片，这个渐变足以支撑视觉 */
         header::before {
             content: '';
             position: absolute;
@@ -267,50 +266,55 @@
         /* 手机模型样式优化 */
         .mockup {
             width: 280px;
-            height: 560px;
+            /* 适配 9:19.5 全面屏比例 */
+            height: 600px; 
             border: 8px solid #1a2a40;
-            border-radius: 40px;
+            border-radius: 45px; /* 更大的圆角适配现代手机 */
             overflow: hidden;
             position: relative;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
             background-color: #050a14;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .mockup:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
             border-color: #2a3a55;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            z-index: 10;
         }
         
-        /* 增加手机刘海效果 */
+        /* 手机刘海效果优化 */
         .mockup::after {
             content: '';
             position: absolute;
             top: 0; left: 50%;
             transform: translateX(-50%);
-            width: 40%;
-            height: 25px;
+            width: 35%;
+            height: 28px;
             background: #1a2a40;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
             z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .mockup img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* 确保图片填满且不拉伸 */
+            display: block;
         }
         
-        .mockup-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #0a1628, #152540);
-            color: #334;
-            font-size: 3rem;
+        /* 图片遮罩，让图片看起来嵌在屏幕里 */
+        .mockup::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 36px; /* 略小于外框 */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            pointer-events: none;
+            z-index: 5;
         }
 
         /* 页脚 */
@@ -347,7 +351,7 @@
 
         /* --- 模态框 (Modal) 样式 --- */
         .modal {
-            display: none; /* 默认隐藏 */
+            display: none;
             position: fixed;
             z-index: 2000;
             left: 0;
@@ -355,7 +359,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.85); /* 黑色背景半透明 */
+            background-color: rgba(0,0,0,0.85);
             backdrop-filter: blur(5px);
             animation: fadeIn 0.3s;
         }
@@ -423,7 +427,6 @@
             padding-left: 20px;
         }
         
-        /* 滚动条样式 */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -443,13 +446,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 移动端适配 */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
-            .nav-links { display: none; } /* 真实项目中建议做成汉堡菜单，此处保持简化 */
+            .nav-links { display: none; }
             .modal-content { width: 95%; margin: 20% auto; padding: 25px; }
-            .mockup-container { gap: 30px; }
-            .mockup { width: 240px; height: 480px; }
+            .mockup-container { gap: 40px; }
+            .mockup { width: 260px; height: 550px; }
         }
     </style>
 </head>
@@ -508,18 +510,15 @@
         
         <div class="mockup-container">
             <div class="mockup">
-                <img src="5ff7aadeac7b7cb54c8779b1dc9021b4_origin(1).jpg" alt="APP首页">
+                <img src="i1.jpg" alt="卦象占卜界面">
             </div>
             
             <div class="mockup">
-                <div class="mockup-placeholder">
-                    <span style="font-size: 0.5em; color: #aaa;">八字排盘<br>界面预览</span>
-                </div>
+                <img src="i2.png" alt="解读结果界面">
             </div>
-             <div class="mockup">
-                <div class="mockup-placeholder">
-                    <span style="font-size: 0.5em; color: #aaa;">运势分析<br>界面预览</span>
-                </div>
+            
+            <div class="mockup">
+                <img src="i3.png" alt="深层解读界面">
             </div>
         </div>
     </section>
@@ -564,8 +563,6 @@
 
                 <h3>4. 账号注销与数据删除</h3>
                 <p>您有权随时要求删除您的个人数据。您可以通过应用内的设置选项或发送邮件至 support@whcloudstar.cn 联系我们进行数据清除。</p>
-                <br>
-                <p><em>(注：用户协议详细条款通常包含服务范围、免责声明等，此处与隐私政策合并展示。)</em></p>
             </div>
         </div>
     </div>
@@ -620,19 +617,16 @@
     </div>
 
     <script>
-        // 打开模态框
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
-            document.body.style.overflow = "hidden"; // 禁止背景滚动
+            document.body.style.overflow = "hidden";
         }
 
-        // 关闭模态框
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
-            document.body.style.overflow = "auto"; // 恢复背景滚动
+            document.body.style.overflow = "auto";
         }
 
-        // 点击模态框外部关闭
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
